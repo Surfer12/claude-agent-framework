@@ -85,6 +85,11 @@ class ToolRegistry:
                 issubclass(obj, Tool) and 
                 obj is not Tool and
                 not name.startswith('_')):
+                
+                # Skip MCPTool as it requires specific parameters and should not be auto-registered
+                if name == 'MCPTool':
+                    continue
+                    
                 try:
                     self.register_tool(obj)
                 except Exception as e:
