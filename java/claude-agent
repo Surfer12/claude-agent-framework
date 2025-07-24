@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# Claude Agent Framework Wrapper Script
+# This script provides an easy way to run the Claude Agent Framework
+
+# Get the directory where this script is located
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# Path to the JAR file
+JAR_PATH="$SCRIPT_DIR/target/claude-agent-framework-1.0.0.jar"
+
+# Check if JAR exists
+if [ ! -f "$JAR_PATH" ]; then
+    echo "Error: JAR file not found at $JAR_PATH"
+    echo "Please run 'mvn clean package' to build the project first."
+    exit 1
+fi
+
+# Run the application with the provided arguments, defaulting to interactive mode
+if [ $# -eq 0 ]; then
+    # No arguments provided, run in interactive mode with verbose output
+    java -jar "$JAR_PATH" -v interactive
+else
+    # Pass all arguments to the application
+    java -jar "$JAR_PATH" "$@"
+fi

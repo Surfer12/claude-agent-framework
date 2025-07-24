@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# Claude Agent Framework Debug Wrapper Script
+# This script provides detailed error information
+
+# Get the directory where this script is located
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# Path to the JAR file
+JAR_PATH="$SCRIPT_DIR/target/claude-agent-framework-1.0.0.jar"
+
+# Check if JAR exists
+if [ ! -f "$JAR_PATH" ]; then
+    echo "Error: JAR file not found at $JAR_PATH"
+    echo "Please run 'mvn clean package' to build the project first."
+    exit 1
+fi
+
+echo "Debug Info:"
+echo "API Key length: $(echo -n "$ANTHROPIC_API_KEY" | wc -c | tr -d ' ')"
+echo "API Key starts with: $(echo "$ANTHROPIC_API_KEY" | head -c 20)..."
+echo "Java version: $(java -version 2>&1 | head -1)"
+echo "Current directory: $(pwd)"
+echo "JAR path: $JAR_PATH"
+echo "Arguments: $@"
+echo "Environment ANTHROPIC_API_KEY set: $([ -n "$ANTHROPIC_API_KEY" ] && echo "Yes" || echo "No")"
+echo ""
+
+# Run with full stack traces enabled
+java -XX:+PrintGCDetails -Djava.util.logging.level=FINEST -jar "$JAR_PATH" "$@"

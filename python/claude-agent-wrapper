@@ -1,0 +1,15 @@
+#!/bin/bash
+# Claude Agent Framework Wrapper Script
+# This script runs the Claude Agent CLI using Pixi
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd "$SCRIPT_DIR"
+
+# Check if we're in the right directory
+if [ ! -f "pixi.toml" ]; then
+    echo "Error: Must run from the Python project directory"
+    exit 1
+fi
+
+# Run with pixi
+exec pixi run claude-agent "$@"

@@ -1,0 +1,14 @@
+[workspace]
+authors = ["Ryan Oates <ryanoatsie@outlook.com>"]
+channels = ["conda-forge"]
+name = "claude-agent-framework"
+platforms = ["osx-arm64"]
+version = "0.1.0"
+
+[tasks]
+
+[dependencies]
+anthropic = ">=0.59.0,<0.60"
+openai = ">=1.97.1,<2"
+gradle = ">=8.11.1,<9"
+maven = ">=3.9.10,<4"

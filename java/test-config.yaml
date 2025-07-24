@@ -1,0 +1,12 @@
+agent:
+  name: test-agent
+  system_prompt: "You are a helpful AI assistant. Be concise."
+  verbose: true
+
+model:
+  model: claude-3-haiku-20240307
+  max_tokens: 100
+  temperature: 0.7
+
+tools:
+  enabled: []
